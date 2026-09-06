@@ -1,52 +1,36 @@
-const menuToggle = document.getElementById("menu-toggle");
-const navList = document.getElementById("nav-list");
-const navItems = navList.querySelectorAll("li");
-const sideNav = document.getElementById("side-nav");
-let isOpen = false;
+const { API, fetchJson, escapeHtml, showLoading, showError, bindClickableCards } = window.Yummy;
+const container = document.getElementById("meals-container");
 
-menuToggle.addEventListener("click", () => {
-    isOpen = !isOpen;
-    if (isOpen) {
-        navList.classList.add("show");
-        sideNav.classList.add("move");
-        menuToggle.innerHTML = '<i class="fas fa-times fs-1"></i>';
-        navItems.forEach((item, index) => {
-            setTimeout(() => {
-                item.classList.add("show");
-            }, index * 100);
-        });
-    } else {
-        navList.classList.remove("show");
-        sideNav.classList.remove("move");
-        menuToggle.innerHTML = '<i class="fas fa-bars fs-1"></i>';
-        navItems.forEach((item) => item.classList.remove("show"));
-    }
-});
-function displayIngredients(ingrediants) {
-    const container = document.getElementById("meals-container");
-    container.innerHTML = ingrediants.map((ing) => `
-     <div class="col-md-3">
-       <div  class=" text-center p-2 card-ing" data-id="${ing.strIngredient}">
-       <i class="fa-solid fa-drumstick-bite fa-4x"></i>
-       <h3>${ing.strIngredient}</h3>
-       <p>${ing.strDescription.slice(0, 90)}</p>
-       </div>
-     </div>
-     `).join('')
-    //click on ingredients to get meals
-    document.querySelectorAll(".card-ing").forEach((element) => {
-        element.addEventListener("click", function () {
-            const ingredMeal = this.dataset.id;
-            console.log(ingredMeal);
-            window.location.href = `ingred-meals.html?id=${ingredMeal}`;
-        });
-    });
+function displayIngredients(ingredients) {
+  container.removeAttribute("aria-busy");
+  container.innerHTML = ingredients
+    .map((ingredient) => {
+      const name = escapeHtml(ingredient.strIngredient);
+      const description = escapeHtml(
+        (ingredient.strDescription || "No description available").slice(0, 90)
+      );
+      return `
+        <div class="col-sm-6 col-md-4 col-lg-3">
+          <div class="text-center p-2 card-ing browse-card" data-id="${name}" tabindex="0" role="link" aria-label="${name}">
+            <i class="fa-solid fa-drumstick-bite fa-4x" aria-hidden="true"></i>
+            <h3 class="h5 mt-3">${name}</h3>
+            <p class="mb-0">${description}</p>
+          </div>
+        </div>`;
+    })
+    .join("");
+
+  bindClickableCards(".card-ing", (card) => `ingred-meals.html?id=${encodeURIComponent(card.dataset.id)}`);
 }
-async function fetchIngredients() {
-    const res = await fetch("https://www.themealdb.com/api/json/v1/1/list.php?i=list");
-    const data = await res.json();
-    const ingrediants = data.meals.slice(0, 20)
-    console.log(ingrediants)
-    displayIngredients(ingrediants)
+
+async function loadIngredients() {
+  showLoading(container);
+  try {
+    const data = await fetchJson(`${API}/list.php?i=list`);
+    displayIngredients((data.meals || []).slice(0, 20));
+  } catch {
+    showError(container, "Could not load ingredients. Check your connection and try again.", loadIngredients);
+  }
 }
-fetchIngredients()
+
+loadIngredients();

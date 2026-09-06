@@ -1,104 +1,221 @@
- body {
-     margin: 0;
-      padding: 0;
-      overflow-x: hidden;
-      background-color: #111;
-      color: white;
-    }
-a{
-  text-decoration: none;
+:root {
+  --bg: #111111;
+  --surface: #1c1c1c;
+  --surface-hover: #252525;
+  --rail: #ffffff;
+  --drawer: #000000;
+  --accent: #f7c100;
+  --text: #ffffff;
+  --muted: #b3b3b3;
+  --danger: #d9534f;
+  --radius: 12px;
+  --rail-w: 80px;
 }
-    #side-nav {
-      width: 80px;
-      background-color: white;
-      height: 100vh;
-      position: fixed;
-      left: 0;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-     
-     transition: 0.2s ease;
-      flex-direction: column;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 0;
-    }
 
-    #logo {
-      font-size: 30px;
-      color: #f7c100;
-    }
+* {
+  box-sizing: border-box;
+}
 
-    #menu-toggle {
-      cursor: pointer;
-      font-size: 24px;
-      color: black;
-    }
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  background-color: var(--bg);
+  color: var(--text);
+}
 
-    #nav-list {
-      position: fixed;
-      top: 0;
-       left: 0;
-      height: 100vh;
-      width: 300px;
-      background-color: #000;
-      color: white;
-      transform: translateX(-100%);
-      transition: transform 0.5s;
-      padding-block: 20px;
-      padding-left: 20px;
-      padding-right: 50px;
-    }
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    #nav-list.show {
-      transform: translateX(0px);
-     
-    }
+#side-nav {
+  width: var(--rail-w);
+  background-color: var(--rail);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  transition: transform 0.2s ease;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
 
-    #nav-list ul {
-      list-style: none;
-      padding: 0;
-    }
+#logo {
+  display: block;
+  width: 100%;
+  text-align: center;
+}
 
-    #nav-list ul li {
-      padding: 15px;
-      opacity: 0;
-      transform: translateY(110px);
-      transition: 0.2s ease;
-    }
-   
-    #nav-list ul li.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .move{
-     
-      transform: translateX(220px);
-    }
-    #copyright {
-      color: #000;
-      font-size: 12px;
-    }
+#logo img {
+  width: 75%;
+  display: block;
+  margin: 0 auto;
+}
 
-    .meals-section {
-     margin-left: 50px; 
-      padding: 30px;
-    }
+#menu-toggle {
+  cursor: pointer;
+  font-size: 24px;
+  color: #000;
+  background: none;
+  border: none;
+  padding: 8px;
+  line-height: 1;
+}
 
-    .card {
-      background-color: #1c1c1c;
-      border: none;
-      transition: transform 0.2s;
-       position: relative;
+#menu-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+#nav-list {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 300px;
+  background-color: var(--drawer);
+  color: var(--text);
+  transform: translateX(-100%);
+  transition: transform 0.5s;
+  padding: 20px 50px 20px 20px;
+  z-index: 999;
+}
+
+#nav-list.show {
+  transform: translateX(0);
+}
+
+#nav-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#nav-list ul li {
+  padding: 15px;
+  opacity: 0;
+  transform: translateY(110px);
+  transition: 0.2s ease;
+}
+
+#nav-list ul li.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+#nav-list a {
+  color: var(--text);
+  font-weight: 500;
+}
+
+#nav-list a:hover,
+#nav-list a.active {
+  color: var(--accent);
+}
+
+#nav-list a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.nav-footer {
+  padding: 0 15px 10px;
+}
+
+.nav-footer .icons {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.nav-footer p {
+  width: 75%;
+  color: var(--muted);
+  font-size: 13px;
+  margin: 0;
+}
+
+.move {
+  transform: translateX(220px);
+}
+
+.nav-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 998;
+}
+
+#copyright {
+  color: #000;
+  font-size: 12px;
+}
+
+.meals-section {
+  margin-left: var(--rail-w);
+  padding: 30px;
+  min-height: 100vh;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+}
+
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.back-link,
+button.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+  cursor: pointer;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--accent);
+}
+
+.card {
+  background-color: var(--surface);
+  border: none;
+  border-radius: var(--radius);
+  position: relative;
   overflow: hidden;
   cursor: pointer;
-    }
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
 
-
-
-.card img {
+.card img,
+.meal-card img {
   transition: 0.3s ease;
+  border-radius: var(--radius);
+  object-fit: cover;
+  height: 260px;
+  width: 100%;
+}
+
+.meal-card:hover,
+.meal-card:focus-within,
+.card-catog:hover,
+.card-catog:focus-within {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
 }
 
 .meal-overlay {
@@ -107,38 +224,266 @@ a{
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
-  color: black;
+  background-color: rgba(255, 255, 255, 0.88);
+  color: #111;
   display: flex;
   align-items: center;
-  
-  font-weight: bold;
+  padding: 0 12px;
+  font-weight: 700;
   font-size: 20px;
   transition: 0.3s ease-in-out;
 }
 
-.card:hover .meal-overlay {
+.card:hover .meal-overlay,
+.card:focus-within .meal-overlay,
+.card-catog:hover .meal-overlay,
+.card-catog:focus-within .meal-overlay {
   bottom: 0;
 }
-.card img {
-      border-radius: 5px 5px 0 0;
-      object-fit: cover;
-      height: 260px;
-    }
- .form-control:focus{
-        outline: none;
-        border: none;
-    }
-.card-catog{
-    border: none;
-      transition: transform 0.2s;
-       position: relative;
+
+.card-catog {
+  border: none;
+  border-radius: var(--radius);
+  position: relative;
   overflow: hidden;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
-.card-catog:hover .meal-overlay {
-  bottom: 0;
+
+.card-catog img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  border-radius: var(--radius);
 }
-.area-detail,.card-ing{
-    cursor: pointer;
+
+.browse-card,
+.area-detail,
+.card-ing {
+  cursor: pointer;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.5rem 1rem;
+  height: 100%;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.browse-card:hover,
+.browse-card:focus-visible,
+.area-detail:hover,
+.area-detail:focus-visible,
+.card-ing:hover,
+.card-ing:focus-visible {
+  transform: translateY(-4px);
+  background: var(--surface-hover);
+  outline: none;
+}
+
+.form-control {
+  background: var(--surface);
+  border: 1px solid #333;
+  color: var(--text);
+  padding: 0.75rem 1rem;
+}
+
+.form-control::placeholder {
+  color: #888;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 0.2rem rgba(247, 193, 0, 0.25);
+  background: var(--surface);
+  color: var(--text);
+}
+
+.skeleton-card {
+  height: 260px;
+  border-radius: var(--radius);
+  background: linear-gradient(90deg, #1c1c1c 25%, #2a2a2a 50%, #1c1c1c 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.status-panel {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  color: var(--muted);
+}
+
+.status-panel i {
+  font-size: 2.5rem;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.status-panel h2 {
+  color: var(--text);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.status-panel p {
+  margin-bottom: 1.25rem;
+}
+
+.details-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.breadcrumbs a:hover,
+.breadcrumbs a:focus-visible {
+  color: var(--accent);
+}
+
+.details-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  background: var(--surface);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.icon-btn:hover,
+.icon-btn:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+  outline: none;
+}
+
+.icon-btn.is-active {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.meal-photo {
+  width: 100%;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.recipe-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recipe-list li {
+  background: rgb(163, 212, 215);
+  color: #282828;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.tag-badge {
+  background-color: rgb(214, 191, 191);
+  color: rgb(209, 100, 100);
+  padding: 8px;
+  font-weight: 500;
+  border-radius: 8px;
+  display: inline-block;
+  margin: 0 4px 4px 0;
+}
+
+.details-meta {
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+
+.details-meta a {
+  color: var(--accent);
+}
+
+.details-meta a:hover {
+  text-decoration: underline;
+}
+
+.app-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: #222;
+  color: var(--text);
+  border: 1px solid #444;
+  padding: 12px 16px;
+  border-radius: 8px;
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  transition: 0.2s ease;
+  z-index: 1100;
+}
+
+.app-toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (hover: none) {
+  .meal-overlay {
+    bottom: 0;
+    height: auto;
+    min-height: 40%;
+    align-items: flex-end;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --rail-w: 56px;
+  }
+
+  .meals-section {
+    padding: 16px 12px;
+  }
+
+  .card img,
+  .meal-card img,
+  .card-catog img,
+  .skeleton-card {
+    height: 200px;
+  }
 }

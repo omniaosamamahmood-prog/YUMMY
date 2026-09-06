@@ -1,60 +1,28 @@
-const menuToggle = document.getElementById("menu-toggle");
-const navList = document.getElementById("nav-list");
-const navItems = navList.querySelectorAll("li");
-const sideNav = document.getElementById("side-nav");
-let isOpen = false;
+const { API, fetchJson, showLoading, showError, showToast, renderMeals } = window.Yummy;
+const container = document.getElementById("meals-container");
+const CACHE_KEY = "yummy-home-meals";
 
-menuToggle.addEventListener("click", () => {
-  isOpen = !isOpen;
-  if (isOpen) {
-    navList.classList.add("show");
-    sideNav.classList.add("move");
-    menuToggle.innerHTML = '<i class="fas fa-times fs-1"></i>';
-    navItems.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add("show");
-      }, index * 100);
-    });
-  } else {
-    navList.classList.remove("show");
-    sideNav.classList.remove("move");
-    menuToggle.innerHTML = '<i class="fas fa-bars fs-1"></i>';
-    navItems.forEach((item) => item.classList.remove("show"));
+async function loadHome() {
+  showLoading(container);
+  try {
+    const data = await fetchJson(`${API}/search.php?s=`);
+    const meals = (data.meals || []).slice(0, 20);
+    localStorage.setItem(CACHE_KEY, JSON.stringify(meals));
+    renderMeals(container, meals);
+  } catch {
+    let cached = null;
+    try {
+      cached = JSON.parse(localStorage.getItem(CACHE_KEY));
+    } catch {
+      cached = null;
+    }
+    if (cached && cached.length) {
+      renderMeals(container, cached);
+      showToast("Showing saved meals (offline)");
+    } else {
+      showError(container, "Could not load meals. Check your connection and try again.", loadHome);
+    }
   }
-});
-async function fetchMeals() {
-  const response = await fetch(
-    "https://www.themealdb.com/api/json/v1/1/search.php?s="
-  );
-  const data = await response.json();
-  const meals = data.meals.slice(0, 20);
-  // console.log(meals);
-  localStorage.setItem("meals", JSON.stringify(meals));
-  displayMeals(meals);
 }
-function displayMeals(meals) {
-  const container = document.getElementById("meals-container");
-  container.innerHTML = meals
-    .map(
-      (meal) => `
-     <div class="col-md-3">
-      <div class="card meal-card" data-id="${meal.idMeal}"> 
-        <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
-        <div class="meal-overlay ps-2">
-           ${meal.strMeal}
-        </div>
-        </div>
-      </div>
-   `
-    )
-    .join("");
-  //click on the card
-  document.querySelectorAll(".meal-card").forEach((element) => {
-    element.addEventListener("click", function () {
-      const id = this.dataset.id;
-      console.log(id);
-      window.location.href = `meal-details.html?id=${id}`;
-    });
-  });
-}
-fetchMeals();
+
+loadHome();

@@ -1,71 +1,70 @@
-const menuToggle = document.getElementById("menu-toggle");
-const navList = document.getElementById("nav-list");
-const navItems = navList.querySelectorAll("li");
-const sideNav = document.getElementById("side-nav");
-let isOpen = false;
+const {
+  API,
+  fetchJson,
+  debounce,
+  showLoading,
+  showEmpty,
+  showError,
+  renderMeals,
+} = window.Yummy;
 
-menuToggle.addEventListener("click", () => {
-  isOpen = !isOpen;
-  if (isOpen) {
-    navList.classList.add("show");
-    sideNav.classList.add("move");
-    menuToggle.innerHTML = '<i class="fas fa-times fs-1"></i>';
-    navItems.forEach((item, index) => {
-      setTimeout(() => {
-        item.classList.add("show");
-      }, index * 100);
-    });
-  } else {
-    navList.classList.remove("show");
-    sideNav.classList.remove("move");
-    menuToggle.innerHTML = '<i class="fas fa-bars fs-1"></i>';
-    navItems.forEach((item) => item.classList.remove("show"));
+const container = document.getElementById("meals-container");
+const nameInput = document.getElementById("search-name");
+const letterInput = document.getElementById("search-letter");
+let searchRequest = 0;
+
+showEmpty(container, "Search for a meal", "Type a name or a first letter to get started.");
+
+async function searchByName(query) {
+  const requestId = ++searchRequest;
+  if (!query) {
+    showEmpty(container, "Search for a meal", "Type a name or a first letter to get started.");
+    return;
   }
-});
-function getMeals(meals) {
-  const container = document.getElementById("meals-container");
-  container.innerHTML = meals
-    .map(
-      (meal) => `
-     <div class="col-md-3">
-      <div class="card meal-card" data-id="${meal.idMeal}"> 
-        <img src="${meal.strMealThumb}" class="card-img-top" alt="${meal.strMeal}">
-        <div class="meal-overlay ps-2">
-           ${meal.strMeal}
-        </div>
-        </div>
-      </div>
-   `
-    )
-    .join("");
-  //click on the card
-  document.querySelectorAll(".meal-card").forEach((element) => {
-    element.addEventListener("click", function () {
-      const id = this.dataset.id;
-      console.log(id);
-      window.location.href = `../meal-details.html?id=${id}`;
+  showLoading(container);
+  try {
+    const data = await fetchJson(`${API}/search.php?s=${encodeURIComponent(query)}`);
+    if (requestId !== searchRequest) return;
+    renderMeals(container, data.meals);
+  } catch {
+    if (requestId !== searchRequest) return;
+    showError(container, "Could not search meals. Check your connection and try again.", () => {
+      searchByName(query);
     });
-  });
+  }
 }
-    document
-    .getElementById("search-name")
-    .addEventListener("input", async function () {
-      const query = this.value.trim();
-      if (query === "") return;
-      const res = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?s=${query}`
-      );
-      const data = await res.json();
-      getMeals(data.meals);
+
+async function searchByLetter(letter) {
+  const requestId = ++searchRequest;
+  if (!letter) {
+    showEmpty(container, "Search for a meal", "Type a name or a first letter to get started.");
+    return;
+  }
+  showLoading(container);
+  try {
+    const data = await fetchJson(`${API}/search.php?f=${encodeURIComponent(letter)}`);
+    if (requestId !== searchRequest) return;
+    renderMeals(container, data.meals);
+  } catch {
+    if (requestId !== searchRequest) return;
+    showError(container, "Could not search meals. Check your connection and try again.", () => {
+      searchByLetter(letter);
     });
-  document
-    .getElementById("search-letter")
-    .addEventListener("input", async function () {
-      const letter = this.value.trim();
-      if (letter === "") return;
-      const res = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/search.php?f=${letter}`
-      );
-      const data = await res.json();
-      getMeals(data.meals);
-    });
+  }
+}
+
+const debouncedNameSearch = debounce((query) => {
+  searchByName(query);
+}, 300);
+
+nameInput.addEventListener("input", () => {
+  letterInput.value = "";
+  debouncedNameSearch(nameInput.value.trim());
+});
+
+letterInput.addEventListener("input", () => {
+  const letter = letterInput.value.replace(/[^a-zA-Z]/g, "").slice(0, 1);
+  letterInput.value = letter;
+  nameInput.value = "";
+  searchByLetter(letter.toLowerCase());
+});
