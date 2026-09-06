@@ -9,17 +9,28 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5">
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white" alt="Bootstrap">
-  <img src="https://img.shields.io/badge/Font_Awesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white" alt="Font Awesome">
-  <img src="https://img.shields.io/badge/TheMealDB-API-E74C3C?style=for-the-badge" alt="TheMealDB">
-  <img src="https://img.shields.io/badge/SweetAlert2-8D6E63?style=for-the-badge" alt="SweetAlert2">
+  <a href="https://yummy-three-orcin.vercel.app/"><strong>Live Demo</strong></a>
 </p>
 
 <p align="center">
-  <img src="https://skillicons.dev/icons?i=html,css,js,bootstrap,vscode,git,github" alt="HTML, CSS, JavaScript, Bootstrap, VS Code, Git, GitHub">
+  <img src="assets/tech/badge-html.svg" alt="HTML5">
+  <img src="assets/tech/badge-css.svg" alt="CSS3">
+  <img src="assets/tech/badge-js.svg" alt="JavaScript">
+  <img src="assets/tech/badge-bootstrap.svg" alt="Bootstrap">
+  <img src="assets/tech/badge-fontawesome.svg" alt="Font Awesome">
+  <img src="assets/tech/badge-themealdb.svg" alt="TheMealDB">
+  <img src="assets/tech/badge-sweetalert.svg" alt="SweetAlert2">
+</p>
+
+<p align="center">
+  <img src="assets/tech/html.svg" alt="HTML5" width="40" height="40">
+  <img src="assets/tech/css.svg" alt="CSS3" width="40" height="40">
+  <img src="assets/tech/js.svg" alt="JavaScript" width="40" height="40">
+  <img src="assets/tech/bootstrap.svg" alt="Bootstrap" width="40" height="40">
+  <img src="assets/tech/fontawesome.svg" alt="Font Awesome" width="40" height="40">
+  <img src="assets/tech/vscode.svg" alt="VS Code" width="40" height="40">
+  <img src="assets/tech/git.svg" alt="Git" width="40" height="40">
+  <img src="assets/tech/github.svg" alt="GitHub" width="40" height="40">
 </p>
 
 A recipe discovery web app built with HTML, CSS, and vanilla JavaScript. Browse meals from [TheMealDB](https://www.themealdb.com/api.php), search by name or first letter, and open a full recipe with instructions, ingredients, and video links.
@@ -39,35 +50,37 @@ The side menu highlights the current page, closes on Escape or backdrop click, a
 ## Tech stack
 
 <p align="center">
-  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="https://skillicons.dev/icons?i=html" alt="HTML5"></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="https://skillicons.dev/icons?i=css" alt="CSS3"></a>
-  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="https://skillicons.dev/icons?i=js" alt="JavaScript"></a>
-  <a href="https://getbootstrap.com/"><img src="https://skillicons.dev/icons?i=bootstrap" alt="Bootstrap"></a>
-  <a href="https://fontawesome.com/"><img src="https://cdn.simpleicons.org/fontawesome/528DD7" alt="Font Awesome" width="48" height="48"></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/HTML"><img src="assets/tech/html.svg" alt="HTML5" width="48" height="48"></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/CSS"><img src="assets/tech/css.svg" alt="CSS3" width="48" height="48"></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"><img src="assets/tech/js.svg" alt="JavaScript" width="48" height="48"></a>
+  <a href="https://getbootstrap.com/"><img src="assets/tech/bootstrap.svg" alt="Bootstrap" width="48" height="48"></a>
+  <a href="https://fontawesome.com/"><img src="assets/tech/fontawesome.svg" alt="Font Awesome" width="48" height="48"></a>
 </p>
 
 | | Tool | Role |
 | :---: | --- | --- |
-| <img src="https://skillicons.dev/icons?i=html" alt="HTML5" width="36"> | [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML) | Page structure |
-| <img src="https://skillicons.dev/icons?i=css" alt="CSS3" width="36"> | [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS) | Theme, layout, and motion |
-| <img src="https://skillicons.dev/icons?i=js" alt="JavaScript" width="36"> | [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | Navigation, search, and API calls |
-| <img src="https://skillicons.dev/icons?i=bootstrap" alt="Bootstrap" width="36"> | [Bootstrap 5.3](https://getbootstrap.com/) | Responsive grid and form styles |
-| <img src="https://cdn.simpleicons.org/fontawesome/528DD7" alt="Font Awesome" width="36" height="36"> | [Font Awesome 6](https://fontawesome.com/) | Menu, status, and recipe icons |
-| <img src="https://img.shields.io/badge/API-TheMealDB-E74C3C?style=flat-square" alt="TheMealDB"> | [TheMealDB API](https://www.themealdb.com/api.php) | Meals, categories, areas, ingredients |
-| <img src="https://img.shields.io/badge/SweetAlert2-8D6E63?style=flat-square" alt="SweetAlert2"> | [SweetAlert2](https://sweetalert2.github.io/) | Contact form success alert |
-| <img src="https://img.shields.io/badge/Web_Storage-4285F4?style=flat-square&logo=googlechrome&logoColor=white" alt="localStorage"> | `localStorage` | Favorites and home-page cache |
+| <img src="assets/tech/html.svg" alt="HTML5" width="36" height="36"> | [HTML5](https://developer.mozilla.org/en-US/docs/Web/HTML) | Page structure |
+| <img src="assets/tech/css.svg" alt="CSS3" width="36" height="36"> | [CSS3](https://developer.mozilla.org/en-US/docs/Web/CSS) | Theme, layout, and motion |
+| <img src="assets/tech/js.svg" alt="JavaScript" width="36" height="36"> | [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) | Navigation, search, and API calls |
+| <img src="assets/tech/bootstrap.svg" alt="Bootstrap" width="36" height="36"> | [Bootstrap 5.3](https://getbootstrap.com/) | Responsive grid and form styles |
+| <img src="assets/tech/fontawesome.svg" alt="Font Awesome" width="36" height="36"> | [Font Awesome 6](https://fontawesome.com/) | Menu, status, and recipe icons |
+| <img src="assets/tech/badge-themealdb.svg" alt="TheMealDB"> | [TheMealDB API](https://www.themealdb.com/api.php) | Meals, categories, areas, ingredients |
+| <img src="assets/tech/badge-sweetalert.svg" alt="SweetAlert2"> | [SweetAlert2](https://sweetalert2.github.io/) | Contact form success alert |
+| <img src="assets/tech/badge-storage.svg" alt="localStorage"> | `localStorage` | Favorites and home-page cache |
 
 No build step, bundler, or backend is required.
 
 ## Getting started
 
 <p>
-  <img src="https://img.shields.io/badge/npx-serve-CB3837?style=for-the-badge&logo=npm&logoColor=white" alt="npx serve">
-  <img src="https://img.shields.io/badge/GitHub_Pages-222222?style=for-the-badge&logo=githubpages&logoColor=white" alt="GitHub Pages">
-  <img src="https://img.shields.io/badge/Live_Server-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white" alt="Live Server">
+  <img src="assets/tech/badge-serve.svg" alt="npx serve">
+  <img src="assets/tech/badge-pages.svg" alt="GitHub Pages">
+  <img src="assets/tech/badge-liveserver.svg" alt="Live Server">
 </p>
 
-Serve the project from the repo root so API calls and relative paths work. Opening `index.html` directly as a `file://` page may be blocked by the browser.
+The live site is at [https://yummy-three-orcin.vercel.app/](https://yummy-three-orcin.vercel.app/).
+
+To run it locally, serve the project from the repo root so API calls and relative paths work. Opening `index.html` directly as a `file://` page may be blocked by the browser.
 
 ```bash
 npx serve
